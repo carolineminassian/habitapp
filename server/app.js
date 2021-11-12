@@ -7,12 +7,20 @@ const connectMongo = require('connect-mongo');
 const expressSession = require('express-session');
 const logger = require('morgan');
 const serveFavicon = require('serve-favicon');
+const cors = require('cors');
 const basicAuthenticationDeserializer = require('./middleware/basic-authentication-deserializer.js');
 const bindUserToViewLocals = require('./middleware/bind-user-to-view-locals.js');
 const baseRouter = require('./routes/index');
 const authenticationRouter = require('./routes/authentication');
 
 const app = express();
+
+app.use(
+  cors({
+    origin: ['http://localhost:3000', process.env.CLIENT_APP_ORIGIN],
+    credentials: true
+  })
+);
 
 app.use(serveFavicon(path.join(__dirname, 'public/images', 'favicon.ico')));
 app.use(logger('dev'));
