@@ -3,9 +3,11 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  timestamps: [{
-    type: Number
-  }] 
+  timestamps: [
+    {
+      type: Number
+    }
+  ]
 });
 
 const Data = mongoose.model('Data', schema);

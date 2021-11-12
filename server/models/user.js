@@ -1,7 +1,6 @@
 'use strict';
 
 const mongoose = require('mongoose');
-import Habit from './Habit';
 
 const schema = new mongoose.Schema({
   name: {
@@ -20,18 +19,20 @@ const schema = new mongoose.Schema({
     required: true
   },
   points: {
-    type: Number, 
+    type: Number,
     default: 0,
     required: true
   },
   image: {
     type: String,
     default: ''
-  }, 
-  habits: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: Habit
-  }]
+  },
+  habits: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Habit'
+    }
+  ]
 });
 
 const User = mongoose.model('User', schema);
