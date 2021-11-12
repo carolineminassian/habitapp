@@ -1,0 +1,25 @@
+{
+  "name": "habitapp",
+  "version": "1.0.0",
+  "description": "Self-improvement via new habits with tags (health, fitness, etc.) that will categorize / group the habits and will help provide recommendations for new habits based on these tags (can have multiple tags to single habit)",
+  "main": "index.js",
+  "dependencies": {
+    "node-sass": "^6.0.1",
+    "react-router-dom": "^6.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "cd server && npm run start",
+    "prepare": "cd server && npm i"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carolineminassian/habitapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/carolineminassian/habitapp/issues"
+  },
+  "homepage": "https://github.com/carolineminassian/habitapp#readme"
+}
