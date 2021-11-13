@@ -13,19 +13,33 @@ const App = () => {
     <div className="App">
       <BrowserRouter>
         <nav>
-          <Link to="/">Home</Link>
+          <Link className="link" to="/">
+            Home
+          </Link>
           <br />
-          <Link to="/SignUp">SignUp</Link>
+          <Link className="link" to="/SignUp">
+            SignUp
+          </Link>
           <br />
-          <Link to="/SignIn">SignIn</Link>
+          <Link className="link" to="/SignIn">
+            SignIn
+          </Link>
           <br />
-          <Link to="/Dashboard">Dashboard</Link>
+          <Link className="link" to="/Dashboard">
+            Dashboard
+          </Link>
           <br />
-          <Link to="/List">List</Link>
+          <Link className="link" to="/List">
+            List
+          </Link>
           <br />
-          <Link to="/Detail">Detail</Link>
+          <Link className="link" to="/Detail">
+            Detail
+          </Link>
           <br />
-          <Link to="/Profile">Profile</Link>
+          <Link className="link" to="/Profile">
+            Profile
+          </Link>
         </nav>
         <Switch>
           <Route path="/" component={Home} exact />

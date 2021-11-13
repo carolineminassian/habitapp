@@ -25,8 +25,12 @@
 nav {
   display: flex;
   justify-content: space-around;
-  text-decoration: none;
-  color: black;
   padding: 1em;
   background-color: rgb(181, 218, 250);
+  border-radius: 1em;
+  margin: 2em;
+}
+.link {
+  text-decoration: none;
+  color: rgb(0, 16, 161);
 }
