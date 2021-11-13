@@ -30,7 +30,8 @@ const schema = new mongoose.Schema({
   habits: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Habit'
+      ref: 'Habit',
+      default: []
     }
   ]
 });
