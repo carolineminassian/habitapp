@@ -46,8 +46,12 @@ const App = () => {
           <Route path="/SignUp" component={SignUp} exact />
           <Route path="/SignIn" component={SignIn} exact />
           <Route path="/Dashboard" component={Dashboard} exact />
-          <Route path="/List" component={List} exact />
-          <Route path="/Detail" component={Detail} exact />
+          <Route path="/category/health/list" component={List} exact />
+          <Route
+            path="/category/:category/detail/:habitId"
+            component={Detail}
+            exact
+          />
           <Route path="/Profile" component={Profile} exact />
         </Switch>
       </BrowserRouter>
