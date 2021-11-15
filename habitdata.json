@@ -1,0 +1,23 @@
+[
+  {
+    "_id": { "$oid": "618f9dd97f5f300e76322242" },
+    "name": "drink water",
+    "category": ["nutrition", "health"],
+    "tags": ["well-being", "nutrition"],
+    "interval": 86400000,
+    "users": [{ "$oid": "618fb6cd7f5f300e76322246" }]
+  },
+  //Add new habits using the following template
+  {
+    "name": "",
+    "category": [] /* choose one or multiple from list: 'fitness',
+    'languages',
+    'nutrition',
+    'organization',
+    'relationships',
+    'social media',
+    'work' */,
+    "tags": [] /* choose one or multiple from list. Feel free to add also other tags but please also add them to the Habit model /server/models/Habit.js -> tags */,
+    "interval": 0
+  }
+]

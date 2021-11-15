@@ -129,6 +129,8 @@ router.post('/user/:userId/habits/:habitId/done', (req, res, next) => {
 });
 
 //POST | checkStreak(habit._id) |  takes habit ID as argument, looks for userId in habit.user.userID, checks last streak in the data log habit.user.data and updates habit.user.streak accordingly
-router.post('', (req, res, next) => {});
+router.post('/user/:userId/habits/:habitId/streak', (req, res, next) => {
+  const { userId, habitId } = req.params;
+});
 
 module.exports = router;

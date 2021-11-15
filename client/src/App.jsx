@@ -46,7 +46,7 @@ const App = () => {
           <Route path="/SignUp" component={SignUp} exact />
           <Route path="/SignIn" component={SignIn} exact />
           <Route path="/Dashboard" component={Dashboard} exact />
-          <Route path="/category/health/list" component={List} exact />
+          <Route path="/category/:category/list" component={List} exact />
           <Route
             path="/category/:category/detail/:habitId"
             component={Detail}
