@@ -7,6 +7,7 @@ import Dashboard from './views/Dashboard';
 import List from './views/List';
 import Detail from './views/Detail';
 import Profile from './views/Profile';
+import Overview from './views/Overview';
 
 const App = () => {
   return (
@@ -40,6 +41,9 @@ const App = () => {
           <Link className="link" to="/Profile">
             Profile
           </Link>
+          <Link className="link" to="/overview">
+            My Overview
+          </Link>
         </nav>
         <Switch>
           <Route path="/" component={Home} exact />
@@ -47,6 +51,8 @@ const App = () => {
           <Route path="/SignIn" component={SignIn} exact />
           <Route path="/Dashboard" component={Dashboard} exact />
           <Route path="/category/:category/list" component={List} exact />
+
+          <Route path="/overview" component={Overview} exact />
           <Route
             path="/category/:category/detail/:habitId"
             component={Detail}
