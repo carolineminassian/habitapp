@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { listHabitDetail } from '../services/habits-api';
+import DateTimePicker from 'react-datetime-picker';
 
 class Detail extends Component {
   constructor() {
@@ -29,6 +30,19 @@ class Detail extends Component {
       <div>
         <h1>Habit Detail view</h1>
         <p>{this.state.habit.name}</p>
+        <DateTimePicker
+          amPmAriaLabel="Select AM/PM"
+          calendarAriaLabel="Toggle calendar"
+          clearAriaLabel="Clear value"
+          dayAriaLabel="Day"
+          hourAriaLabel="Hour"
+          maxDetail="second"
+          minuteAriaLabel="Minute"
+          monthAriaLabel="Month"
+          nativeInputAriaLabel="Date and time"
+          secondAriaLabel="Second"
+          yearAriaLabel="Year"
+        />
         <form>
           <button>Track this habit</button>
         </form>

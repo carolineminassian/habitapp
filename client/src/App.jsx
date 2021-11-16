@@ -30,13 +30,7 @@ const App = () => {
             Dashboard
           </Link>
           <br />
-          <Link className="link" to="/List">
-            List
-          </Link>
           <br />
-          <Link className="link" to="/Detail">
-            Detail
-          </Link>
           <br />
           <Link className="link" to="/Profile">
             Profile
