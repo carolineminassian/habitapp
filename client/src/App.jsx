@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './views/Home';
@@ -8,7 +9,11 @@ import List from './views/List';
 import Detail from './views/Detail';
 import Profile from './views/Profile';
 
+//const user= null
+
 const App = () => {
+  /* constLoadedUser:null
+}  */
   return (
     <div className="App">
       <BrowserRouter>
