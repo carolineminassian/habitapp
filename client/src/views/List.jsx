@@ -13,10 +13,13 @@ class List extends Component {
   }
 
   componentDidMount() {
-    this.setState({ category: this.props.match.params.category }); //turn this into async await
+    this.loadData();
   }
 
-  componentDidUpdate() {
+  componentDidUpdate() {}
+
+  loadData = async () => {
+    await this.setState({ category: this.props.match.params.category });
     listAllHabits(this.state.category)
       .then((habitsFromAPI) => {
         this.setState({
@@ -24,7 +27,7 @@ class List extends Component {
         });
       })
       .catch((error) => console.log(error));
-  }
+  };
 
   render() {
     return (

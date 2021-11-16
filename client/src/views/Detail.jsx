@@ -10,7 +10,11 @@ class Detail extends Component {
   }
 
   componentDidMount() {
-    this.setState({ category: this.props.match.params.category }); //turn this into async await
+    this.loadData();
+  }
+
+  loadData = async () => {
+    await this.setState({ category: this.props.match.params.category }); //turn this into async await
     listHabitDetail(this.props.match.params.habitId)
       .then((habitFromAPI) => {
         this.setState({
@@ -18,7 +22,7 @@ class Detail extends Component {
         });
       })
       .catch((error) => console.log(error));
-  }
+  };
 
   render() {
     return (
