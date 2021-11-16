@@ -1,7 +1,7 @@
 import api from './api';
 
 export const signUp = (body) => {
-  return api.post('/SignUp', body).then((response) => {
+  return api.post('/authentication/sign-up', body).then((response) => {
     const data = response.data;
     const user = data.user;
     return user;
@@ -9,4 +9,6 @@ export const signUp = (body) => {
 };
 
 export const signIn = (body) =>
-  api.post('/SignIn', body).then((response) => response.data.user);
+  api
+    .post('/authentication/sign-in', body)
+    .then((response) => response.data.user);
