@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
+//Components
 import Home from './views/Home';
 import SignUp from './views/SignUp';
 import SignIn from './views/SignIn';
@@ -9,6 +10,13 @@ import List from './views/List';
 import Detail from './views/Detail';
 import Profile from './views/Profile';
 import Overview from './views/Overview';
+//Icons
+import { AiFillHome } from 'react-icons/ai';
+import { FaSignInAlt } from 'react-icons/fa';
+import { CgProfile } from 'react-icons/cg';
+import { MdDashboard } from 'react-icons/md';
+import { FaPencilAlt } from 'react-icons/fa';
+import { GrOverview } from 'react-icons/gr';
 
 //const user= null
 
@@ -20,28 +28,40 @@ const App = () => {
       <BrowserRouter>
         <nav>
           <Link className="link" to="/">
-            Home
+            <div>Home</div>
+            <br />
+            <AiFillHome />
           </Link>
           <br />
           <Link className="link" to="/SignUp">
-            SignUp
+            <div>Sign Up</div>
+            <br />
+            <FaPencilAlt />
           </Link>
           <br />
           <Link className="link" to="/SignIn">
-            SignIn
+            <div>Sign In</div>
+            <br />
+            <FaSignInAlt />
           </Link>
           <br />
           <Link className="link" to="/Dashboard">
-            Dashboard
+            <div>Dashboard</div>
+            <br />
+            <MdDashboard />
           </Link>
           <br />
           <br />
           <br />
-          <Link className="link" to="/Profile">
-            Profile
-          </Link>
           <Link className="link" to="/overview">
-            My Overview
+            <div>My Overview</div>
+            <br />
+            <GrOverview />
+          </Link>
+          <Link className="link" to="/Profile">
+            <div>Profile</div>
+            <br />
+            <CgProfile />
           </Link>
         </nav>
         <Switch>

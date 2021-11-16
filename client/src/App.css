@@ -34,3 +34,18 @@ nav {
   text-decoration: none;
   color: rgb(0, 16, 161);
 }
+
+div ul li {
+  text-decoration: none;
+}
+img {
+  width: 10em;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.p {
+  padding-left: 10em;
+  padding-right: 10em;
+  text-align: center;
+}
