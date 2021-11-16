@@ -75,11 +75,11 @@ const schema = new mongoose.Schema({
           ]
         }
       },
+
       data: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Data',
-        required: true,
-        default: []
+        required: true
       },
       streak: {
         type: Number,
@@ -87,8 +87,8 @@ const schema = new mongoose.Schema({
         default: 0,
         min: 0
       },
-      startingDate: {
-        type: Number, //save date as millisecond value
+      startDate: {
+        type: Date, //save date as millisecond value
         required: true
       },
       additionalTags: [
