@@ -27,19 +27,30 @@ POST | checkStreak(habit._id) |  takes habit ID as argument, looks for userId in
 */
 
 export const listAllHabits = (category) => {
-  api.get(`/category/${category}/list`).then((response) => {
-    console.log(response);
+  return api.get(`/category/${category}/list`).then((response) => {
     return response.data.habits;
   });
 };
 
 export const listHabitDetail = (habitId) => {
-  api.get(`/category/:category/detail/${habitId}`);
+  return api.get(`/category/:category/detail/${habitId}`).then((response) => {
+    return response.data.habit;
+  });
 };
 
-export const listMyHabits = () => {};
+export const listMyHabits = (userId) => {
+  return api.get(`/user/${userId}/habits`).then((response) => {
+    return response.data.myHabits;
+  });
+};
 
-export const addHabit = (userId, { habitId, settings }) => {};
+export const addHabit = (userId, habitId, { settings }) => {
+  return api
+    .post(`/user/${userId}/habits/${habitId}/add`, { settings })
+    .then((response) => {
+      return response.data;
+    });
+};
 
 export const removeHabit = (habitId) => {};
 
