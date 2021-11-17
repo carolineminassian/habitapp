@@ -11,7 +11,7 @@ class Home extends Component {
       i: 0
     };
   }
-
+  /*
   typeWriter = () => {
     if (this.state.i < this.state.txt.length) {
       document.getElementById('h1-landing-page').innerHTML +=
@@ -24,13 +24,11 @@ class Home extends Component {
   componentDidMount() {
     this.typeWriter();
   }
-
+*/
   render() {
     return (
       <>
-        <h1 id="h1-landing-page" onload="typeWriter">
-          Y
-        </h1>
+        <h1 id="h1-landing-page">You deserve feeling awesome.</h1>
 
         <div id="div-dashboard-background"></div>
         <div id="div-dashboard-auth">

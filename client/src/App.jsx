@@ -34,18 +34,6 @@ const App = () => {
             <AiFillHome />
           </Link>
           <br />
-          <Link className="link" to="/SignUp">
-            <div>Sign Up</div>
-            <br />
-            <FaPencilAlt />
-          </Link>
-          <br />
-          <Link className="link" to="/SignIn">
-            <div>Sign In</div>
-            <br />
-            <FaSignInAlt />
-          </Link>
-          <br />
           <Link className="link" to="/Dashboard">
             <div>Dashboard</div>
             <br />
