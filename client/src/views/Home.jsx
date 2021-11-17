@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
 import './../styles/Home.scss';
-import { Link } from 'react-router-dom';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
-      txt: 'ou deserve feeling awesome.',
+      txt: 'You deserve feeling awesome.',
       speed: 150,
-      i: 0
+      i: 0,
+      signIn: true
     };
   }
+
+  handleAuthIn = () => {
+    this.setState({
+      signIn: true
+    });
+  };
+
+  handleAuthUp = () => {
+    this.setState({
+      signIn: false
+    });
+  };
   /*
   typeWriter = () => {
     if (this.state.i < this.state.txt.length) {
@@ -33,13 +47,47 @@ class Home extends Component {
         <div id="div-dashboard-background"></div>
         <div id="div-dashboard-auth">
           <p>Start building new habits today.</p>
-          <Link className="link" to="/SignUp">
-            <div>Sign Up</div>
-          </Link>
-          <br />
-          <Link className="link" to="/SignIn">
-            <div>Sign In</div>
-          </Link>
+          <div id="div-btn-toggle">
+            {(this.state.signIn && (
+              <>
+                <button className="btn-link" onClick={this.handleAuthUp}>
+                  Sign up
+                </button>
+                <button
+                  className="btn-link btn-active"
+                  onClick={this.handleAuthIn}
+                >
+                  Sign in
+                </button>
+              </>
+            )) || (
+              <>
+                <button
+                  className="btn-link btn-active"
+                  onClick={this.handleAuthUp}
+                >
+                  Sign up
+                </button>
+                <button className="btn-link" onClick={this.handleAuthIn}>
+                  Sign in
+                </button>
+              </>
+            )}
+          </div>
+
+          {(this.state.signIn && (
+            <div>
+              <SignIn
+                onAuthenticationChange={this.handleAuthenticationChange}
+              />
+            </div>
+          )) || (
+            <div>
+              <SignUp
+                onAuthenticationChange={this.handleAuthenticationChange}
+              />
+            </div>
+          )}
         </div>
       </>
     );

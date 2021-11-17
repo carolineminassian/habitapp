@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,900;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,800;1,900&display=swap');
 #div-dashboard-background {
   margin: 0;
   width: 100%;
@@ -20,14 +19,91 @@ h1 {
 }
 
 #div-dashboard-auth {
-  background-color: rgba(255, 255, 255, 0.6);
+  font-family: 'Lato', sans-serif;
+  background-color: rgba(255, 255, 255, 0.7);
   box-shadow: 0 0 0.5em #2c272734;
-  width: 40%;
-  height: 20em;
+  width: 30%;
+  height: 30em;
   margin: 0 auto;
   border-radius: 3em;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+
+  > div:not(#div-btn-toggle) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 80%;
+    width: 70%;
+
+    > div {
+      width: 100%;
+    }
+  }
+
+  input {
+    font-size: 1em;
+  }
+
+  > p {
+    color: #3e2d83;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+}
+
+.btn-darkblue {
+  padding: 1em 2em;
+  background-color: #3e2d83;
+  color: white;
+  border: none;
+  border-radius: 2em;
+  margin-top: 0.8em;
+  font-size: 1em;
+}
+.btn-darkblue:hover {
+  background-color: #5869b0;
+  transition: 0.05s ease-in-out;
+}
+
+.btn-link {
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 0.1em;
+  color: #2c2727;
+  padding: 1em 2em;
+  font-size: 1rem;
+  width: 10em;
+}
+
+.btn-link:active {
+  color: #5869b0;
+}
+
+#div-btn-toggle {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2.4em;
+}
+
+.btn-active {
+  transition: 0.2s ease-in-out;
+  border-bottom: 2px solid #f45b92;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  input {
+    border-radius: 0.5em;
+    padding: 0.5em;
+    border: 1px solid #586ab079;
+    width: 100%;
+  }
 }

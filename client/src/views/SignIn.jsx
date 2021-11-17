@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { signIn } from '../services/authentication';
+import './../styles/Home.scss';
 
 class SignIn extends Component {
   constructor() {
@@ -21,7 +22,9 @@ class SignIn extends Component {
     const { email, password } = this.state;
     signIn({ email, password })
       .then((user) => {
-        this.props.onAuthenticationChange(user);
+        //this.props.onAuthenticationChange(user);
+        console.log('SIGN IN SUCCESSFUL');
+        window.location.href = '/dashboard';
       })
       .catch((error) => {
         console.log(error);
@@ -31,7 +34,6 @@ class SignIn extends Component {
   render() {
     return (
       <div>
-        <h1>Sign in here</h1>
         <form onSubmit={this.handleFormSubmission}>
           <label htmlFor="input-email">Email</label>
           <input
@@ -47,13 +49,13 @@ class SignIn extends Component {
           <input
             id="input-password"
             type="password"
-            placeholder="A Secure Password"
+            placeholder="Your Password"
             name="password"
             value={this.state.password}
             onChange={this.handleInputChange}
           />
           <br />
-          <button>Sign In now</button>
+          <button className="btn-darkblue">Sign In</button>
         </form>
       </div>
     );

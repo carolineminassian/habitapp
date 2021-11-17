@@ -57,4 +57,9 @@ router.post('/sign-out', (req, res, next) => {
   res.json({});
 });
 
+router.get('/me', (req, res, next) => {
+  const user = req.user;
+  res.json({ user });
+});
+
 module.exports = router;

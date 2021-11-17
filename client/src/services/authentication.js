@@ -12,3 +12,11 @@ export const signIn = (body) =>
   api
     .post('/authentication/sign-in', body)
     .then((response) => response.data.user);
+
+export const signOut = () => {
+  return api.post('/authentication/sign-out');
+};
+
+export const loadAuthenticatedUser = () => {
+  return api.get('/authentication/me').then((response) => response.data.user);
+};
