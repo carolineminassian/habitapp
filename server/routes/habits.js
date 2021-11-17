@@ -49,19 +49,35 @@ router.get('/user/:userId/habits', (req, res, next) => {
 //POST | addHabit(user._id, {habit._id, settings}) | takes habit ID as an argument and adds this habit to own calendar so that it can be tracked (maybe adds it to a personal data base where properties of habit can be changed?)
 router.post('/user/:userId/habits/:habitId/add', (req, res, next) => {
   const { userId, habitId } = req.params;
-  const { settings, startingDate, additionalTags } = req.body;
+  //const { settings, startingDate, additionalTags } = req.body;
+  const { quantity, unit, startDate } = req.body.settings;
   //add user with settings to habit.users
-  Habit.findByIdAndUpdate(
-    habitId,
-    {
-      $push: {
-        users: { userId, settings, startingDate, additionalTags }
-      }
-    },
-    { new: true }
-  )
-    //add habit to list of habits that user tracks (user.habits)
+  Data.create({})
+    .then((response) => {
+      return Habit.findByIdAndUpdate(
+        habitId,
+        {
+          $push: {
+            users: {
+              $each: [
+                {
+                  userId,
+                  startDate,
+                  settings: { quantity, unit },
+                  data: response._id
+                }
+              ]
+            }
+          }
+        },
+        { new: true }
+      );
+    })
+    //add habit to list of habits that user tracks (user.habits)})
+
     .then(() => {
+      console.log('NEW USER WAS ADDED TO HABIT LIST.');
+
       return User.findByIdAndUpdate(
         userId,
         { $push: { habits: habitId } },
@@ -69,9 +85,13 @@ router.post('/user/:userId/habits/:habitId/add', (req, res, next) => {
       );
     })
     .then((user) => {
+      console.log('NEW HABIT WAS ADDED TO USER.');
+
       res.json({ user });
     })
     .catch((error) => {
+      console.log('THERE WAS AN ERROR ADDING THE USER TO HABIT LIST.');
+      console.log(error);
       next(error);
     });
 });

@@ -44,9 +44,11 @@ export const listMyHabits = (userId) => {
   });
 };
 
-export const addHabit = (userId, habitId, { settings }) => {
+export const addHabit = (data) => {
+  console.log(data);
+  const { userId, habitId } = data;
   return api
-    .post(`/user/${userId}/habits/${habitId}/add`, { settings })
+    .post(`/user/${userId}/habits/${habitId}/add`, data)
     .then((response) => {
       return response.data;
     });

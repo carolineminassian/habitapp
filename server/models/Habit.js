@@ -79,11 +79,11 @@ const schema = new mongoose.Schema({
           ]
         }
       },
+
       data: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Data',
         required: true
-        // default: []
       },
       streak: {
         type: Number,
