@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './../App.css';
+import './../styles/Dashboard.scss';
+
 export default function Dashboard() {
   return (
     <div>

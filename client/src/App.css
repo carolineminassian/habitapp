@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -26,13 +30,16 @@ nav {
   display: flex;
   justify-content: space-around;
   padding: 1em;
-  background-color: rgb(181, 218, 250);
+  //background-color: rgb(181, 218, 250);
   border-radius: 1em;
-  margin: 2em;
+
+  width: 95%;
+  margin: 0 auto;
 }
 .link {
   text-decoration: none;
   color: rgb(0, 16, 161);
+  width: 8em;
 }
 
 div ul li {
@@ -48,4 +55,9 @@ img {
   padding-left: 10em;
   padding-right: 10em;
   text-align: center;
+}
+
+body {
+  margin: 0 auto;
+  color: #2c2727;
 }

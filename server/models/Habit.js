@@ -18,6 +18,7 @@ const schema = new mongoose.Schema({
       'relationships',
       'social media',
       'household chores',
+      'well-being',
       'work'
     ]
   },
