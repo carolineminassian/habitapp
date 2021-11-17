@@ -58,6 +58,10 @@ export const sendReminder = (habitId) => {};
 
 export const updateHabit = (habitId, { settings }) => {};
 
-export const habitCompletion = (habitId) => {};
+export const habitCompletion = (userId, habitId) => {
+  return api.post(`/user/${userId}/habits/${habitId}/done`).then((response) => {
+    return response.data;
+  });
+};
 
 export const checkStreak = (habitId) => {};
