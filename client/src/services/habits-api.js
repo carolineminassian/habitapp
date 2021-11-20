@@ -19,7 +19,7 @@ POST | checkStreak(habit._id) |  takes habit ID as argument, looks for userId in
 */
 
 export const listMyHabits = (userId) => {
-  return api.get(`/user/${userId}/habits`).then((response) => {
+  return api.get(`/user/${userId}/overview`).then((response) => {
     return response.data.myHabits;
   });
 };

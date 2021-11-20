@@ -33,9 +33,6 @@ class Detail extends Component {
 
   handleSubmission = (event) => {
     event.preventDefault();
-    if (!this.state.unit || !this.state.quantity) {
-      alert('Please set a quantity and a unit for your habit.');
-    }
     this.setState({
       startDate: event.target.startDate,
       unit: event.target.unit,
@@ -48,7 +45,7 @@ class Detail extends Component {
     const quantity = this.state.quantity;
 
     addHabit({
-      userId: '618fb6cd7f5f300e76322246',
+      userId: '61969452775568975444e259',
       habit,
       startDate,
       unit,
@@ -56,7 +53,7 @@ class Detail extends Component {
     })
       .then((response) => {
         console.log(response);
-        window.location.href = '/overview';
+        window.location.href = '/user/overview';
       })
       .catch((error) => console.log(error));
   };

@@ -7,7 +7,7 @@ const User = require('./../models/user');
 const Habit = require('./../models/Habit');
 
 //GET | listMyHabits() | lists all habits of registered user
-router.get('/user/:userId/habits', (req, res, next) => {
+router.get('/user/:userId/overview', (req, res, next) => {
   const { userId } = req.params;
   User.findById(userId)
     .populate('habits')
@@ -42,7 +42,7 @@ router.post('/user/:userId/habits/add', (req, res, next) => {
     quantity: req.body.quantity
   })
     .then((newHabit) => {
-      console.log('NEW HABIT WAS CREATED.');
+      console.log('NEW HABIT WAS CREATED.', newHabit);
 
       //add habit to list of habits that user tracks (user.habits)})
       return User.findByIdAndUpdate(

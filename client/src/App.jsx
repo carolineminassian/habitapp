@@ -80,7 +80,7 @@ class App extends Component {
                 <MdDashboard />
               </Link>
 
-              <Link className="link" to="/overview">
+              <Link className="link" to="/user/overview">
                 <div>My Overview</div>
                 <GrOverview />
               </Link>
@@ -101,7 +101,7 @@ class App extends Component {
             <Route path="/Dashboard" component={Dashboard} exact />
             <Route path="/category/:category/list" component={List} exact />
 
-            <Route path="/overview" component={Overview} exact />
+            <Route path="/user/overview" component={Overview} exact />
             <Route
               path="/category/:category/detail/:habitId"
               component={Detail}
