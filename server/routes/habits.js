@@ -5,31 +5,6 @@ const router = express.Router();
 const routeGuard = require('../middleware/route-guard');
 const User = require('./../models/user');
 const Habit = require('./../models/Habit');
-const Data = require('./../models/Data');
-
-//GET | listAllHabits(category) | takes ‘habit category’ as an argument and lists all habits of that category
-router.get('/category/:category/list', (req, res, next) => {
-  const { category } = req.params;
-  Habit.find({ category: category })
-    .then((habits) => {
-      res.json({ habits });
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
-
-//GET | listHabitDetail(habit._id) | takes ‘habit id as an argument and shows all details of that habit. allows user to add it to personal list
-router.get('/category/:category/detail/:habitId', (req, res, next) => {
-  const { habitId } = req.params;
-  Habit.findById(habitId)
-    .then((habit) => {
-      res.json({ habit });
-    })
-    .catch((error) => {
-      next(error);
-    });
-});
 
 //GET | listMyHabits() | lists all habits of registered user
 router.get('/user/:userId/habits', (req, res, next) => {
@@ -45,56 +20,42 @@ router.get('/user/:userId/habits', (req, res, next) => {
     });
 });
 
-//---------- FUNCTIONALITY OF ALL OF THE FOLLOWING HAS _N_O_T_ YET BEEN TESTED ----------
 //POST | addHabit(user._id, {habit._id, settings}) | takes habit ID as an argument and adds this habit to own calendar so that it can be tracked (maybe adds it to a personal data base where properties of habit can be changed?)
-router.post('/user/:userId/habits/:habitId/add', (req, res, next) => {
-  const { userId, habitId } = req.params;
-  //const { settings, startingDate, additionalTags } = req.body;
-  const { quantity, unit, startDate } = req.body.settings;
+router.post('/user/:userId/habits/add', (req, res, next) => {
+  const { userId } = req.params;
+  const habit = req.body.habit;
+  const habitData = {
+    name: habit.name,
+    category: [...habit.category],
+    tags: [...habit.tags],
+    interval: habit.interval
+  };
+
   //add user with settings to habit.users
-  Data.create({})
-    .then((response) => {
-      return Habit.findByIdAndUpdate(
-        habitId,
-        {
-          $push: {
-            users: {
-              $each: [
-                {
-                  userId,
-                  startDate,
-                  settings: { quantity, unit },
-                  data: response._id
-                }
-              ]
-            }
-          }
-        },
-        { new: true }
-      );
-    })
-    //add habit to list of habits that user tracks (user.habits)})
 
-    .then(() => {
-      console.log('NEW USER WAS ADDED TO HABIT LIST.');
+  Habit.create({ userId, ...habitData, ...req.body.settings })
+    .then((newHabit) => {
+      console.log('NEW HABIT WAS CREATED.');
 
+      //add habit to list of habits that user tracks (user.habits)})
       return User.findByIdAndUpdate(
         userId,
-        { $push: { habits: habitId } },
+        { $push: { habits: newHabit._id } },
         { new: true }
       );
     })
     .then((user) => {
-      console.log('NEW HABIT WAS ADDED TO USER.');
-
+      console.log('NEW HABIT WAS ADDED TO EXISTING USER.');
       res.json({ user });
     })
     .catch((error) => {
-      console.log('THERE WAS AN ERROR ADDING THE USER TO HABIT LIST.');
+      console.log('THERE WAS AN ERROR CREATING A NEW HABIT.');
       console.log(error);
       next(error);
     });
 });
+
+//---------- FUNCTIONALITY OF ALL OF THE FOLLOWING HAS _N_O_T_ YET BEEN TESTED ----------
 
 //POST/DELETE | removeHabit(habit._id) | takes habit ID as an argument and removes this habit from own calendar so that it is no longer tracked
 router.post('/user/:userId/habits/:habitId/remove', (req, res, next) => {

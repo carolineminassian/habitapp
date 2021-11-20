@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
-import { listAllHabits } from './../services/habits-api';
 import { Link } from 'react-router-dom';
+import allHabitData from './../habitdata';
 
 class List extends Component {
   constructor() {
@@ -13,20 +13,18 @@ class List extends Component {
   }
 
   componentDidMount() {
-    this.loadData();
+    this.loadData(allHabitData);
   }
 
   componentDidUpdate() {}
 
   loadData = async () => {
     await this.setState({ category: this.props.match.params.category });
-    listAllHabits(this.state.category)
-      .then((habitsFromAPI) => {
-        this.setState({
-          habits: habitsFromAPI
-        });
-      })
-      .catch((error) => console.log(error));
+    await this.setState({
+      habits: allHabitData.filter((habit) =>
+        habit.category.includes(this.state.category)
+      )
+    });
   };
 
   render() {
@@ -39,7 +37,7 @@ class List extends Component {
               <li key={habit._id}>
                 <Link
                   className="link"
-                  to={`/category/${this.state.category}/detail/${habit._id}`}
+                  to={`/category/${this.state.category}/detail/${habit.id}`}
                 >
                   {habit.name}
                 </Link>
