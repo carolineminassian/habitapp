@@ -3,14 +3,16 @@ import { addHabit } from '../services/habits-api';
 import DateTimePicker from 'react-datetime-picker';
 import allHabitData from './../habitdata';
 import './../styles/Detail.scss';
+import { loadAuthenticatedUser } from './../services/authentication';
 
 class Detail extends Component {
   constructor() {
     super();
     this.state = {
+      // user,
       habit: {},
       startDate: new Date(),
-      unit: '',
+      unit: 'times',
       quantity: ''
     };
   }
@@ -31,6 +33,20 @@ class Detail extends Component {
     console.log(this.state);
   };
 
+  // loadUser = () => {
+  //   let user;
+  //   loadAuthenticatedUser()
+  //   .then((authenticatedUser) => {
+  //     if (authenticatedUser) {
+  //       user = authenticatedUser;
+  //     }
+  //     console.log(authenticatedUser);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // };
+
   handleSubmission = (event) => {
     event.preventDefault();
     this.setState({
@@ -43,9 +59,12 @@ class Detail extends Component {
     const startDate = this.state.startDate;
     const unit = this.state.unit;
     const quantity = this.state.quantity;
+    // this.loadUser();
+    const userId = '61969452775568975444e259';
 
     addHabit({
-      userId: '61969452775568975444e259',
+      // userId: user._id,
+      userId,
       habit,
       startDate,
       unit,
@@ -53,7 +72,8 @@ class Detail extends Component {
     })
       .then((response) => {
         console.log(response);
-        window.location.href = '/user/overview';
+        window.location.href = `/user/${userId}/overview`;
+        // window.location.href = `/user/${user._id}/overview`;
       })
       .catch((error) => console.log(error));
   };
@@ -92,11 +112,11 @@ class Detail extends Component {
             value={this.state.unit}
             required
           >
+            <option value="times">times</option>
             <option value="repetitions">repetitions</option>
             <option value="pages">pages</option>
             <option value="hours">hours</option>
             <option value="mins">mins</option>
-            <option value="times">times</option>
             <option value="l">l</option>
             <option value="ml">ml</option>
             <option value="oz">oz</option>

@@ -11,7 +11,8 @@ class Overview extends Component {
   }
 
   componentDidMount() {
-    this.loadHabitData('61969452775568975444e259');
+    const userId = '61969452775568975444e259';
+    this.loadHabitData(userId);
     console.log(this.state);
   }
 
@@ -26,7 +27,9 @@ class Overview extends Component {
       });
   };
 
-  handleCompletion = () => {};
+  handleCompletion = () => {
+    const dataTracking = this.state.habits.data;
+  };
 
   render() {
     return (
@@ -41,31 +44,31 @@ class Overview extends Component {
                   per day
                   <div>
                     <span>
-                      Mon<button>X</button>
+                      Mon<button onClick={this.handleCompletion}>X</button>
                     </span>
                     <span>
                       {' '}
-                      Tue<button>X</button>
+                      Tue<button onClick={this.handleCompletion}>X</button>
                     </span>
                     <span>
                       {' '}
-                      Wed<button>X</button>
+                      Wed<button onClick={this.handleCompletion}>X</button>
                     </span>
                     <span>
                       {' '}
-                      Thu<button>X</button>
+                      Thu<button onClick={this.handleCompletion}>X</button>
                     </span>
                     <span>
                       {' '}
-                      Fri<button>X</button>
+                      Fri<button onClick={this.handleCompletion}>X</button>
                     </span>
                     <span>
                       {' '}
-                      Sat<button>X</button>
+                      Sat<button onClick={this.handleCompletion}>X</button>
                     </span>
                     <span>
                       {' '}
-                      Sun<button>X</button>
+                      Sun<button onClick={this.handleCompletion}>X</button>
                     </span>
                   </div>
                 </li>

@@ -62,11 +62,11 @@ const schema = new mongoose.Schema({
   unit: {
     type: String,
     enum: [
+      'times',
       'repetitions',
       'pages',
       'hours',
       'mins',
-      'times',
       'l',
       'ml',
       'oz',
@@ -79,7 +79,8 @@ const schema = new mongoose.Schema({
       'glasses',
       'bottles',
       'other'
-    ]
+    ],
+    default: 'times'
   },
 
   data: [
@@ -92,6 +93,7 @@ const schema = new mongoose.Schema({
     type: Date,
     required: true
   },
+
   additionalTags: [
     {
       type: String
