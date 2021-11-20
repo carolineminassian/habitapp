@@ -1,4 +1,4 @@
-import { useState } from 'react';
+//import { useState } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 //Components
@@ -75,7 +75,6 @@ class App extends Component {
             <nav>
               <Link className="link" to="/">
                 <div>Home</div>
-                <br />
                 <AiFillHome />
               </Link>
               <Link className="link" to="/Dashboard">
@@ -91,7 +90,7 @@ class App extends Component {
                 <div>Profile</div>
                 <CgProfile />
               </Link>
-              <button onClick={this.handleSignOut}>
+              <button className="signOutButton" onClick={this.handleSignOut}>
                 <span>Sign Out</span>
               </button>
             </nav>
@@ -117,5 +116,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
