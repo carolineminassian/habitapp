@@ -1,4 +1,5 @@
-import { useState } from 'react';
+// import { useState } from 'react';
+//import { useState } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
 //Components
@@ -13,10 +14,10 @@ import Profile from './views/Profile';
 import Overview from './views/Overview';
 //Icons
 import { AiFillHome } from 'react-icons/ai';
-import { FaSignInAlt } from 'react-icons/fa';
+// import { FaSignInAlt } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { MdDashboard } from 'react-icons/md';
-import { FaPencilAlt } from 'react-icons/fa';
+// import { FaPencilAlt } from 'react-icons/fa';
 import { GrOverview } from 'react-icons/gr';
 import { loadAuthenticatedUser, signOut } from './services/authentication';
 
@@ -61,6 +62,7 @@ class App extends Component {
       .then(() => {
         this.setState({ user: null });
         window.location.href = '/';
+        //this.props.history.push('/'); -> no loading bar :)
       })
       .catch((error) => {
         console.log(error);
@@ -75,7 +77,6 @@ class App extends Component {
             <nav>
               <Link className="link" to="/">
                 <div>Home</div>
-                <br />
                 <AiFillHome />
               </Link>
               <Link className="link" to="/Dashboard">
@@ -91,7 +92,7 @@ class App extends Component {
                 <div>Profile</div>
                 <CgProfile />
               </Link>
-              <button onClick={this.handleSignOut}>
+              <button className="signOutButton" onClick={this.handleSignOut}>
                 <span>Sign Out</span>
               </button>
             </nav>
@@ -117,5 +118,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;

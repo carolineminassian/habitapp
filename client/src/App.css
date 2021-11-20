@@ -6,10 +6,10 @@
   text-align: center;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
+} */
 
 .App-header {
   background-color: #282c34;
@@ -29,16 +29,15 @@
 nav {
   display: flex;
   justify-content: space-around;
-  padding: 1em;
-  //background-color: rgb(181, 218, 250);
+  padding: 0.5em;
   border-radius: 1em;
-
+  margin: 1em;
+  background-color: #d7deff;
   width: 95%;
-  margin: 0 auto;
 }
 .link {
   text-decoration: none;
-  color: rgb(0, 16, 161);
+  color: #2c2727;
   width: 8em;
 }
 
@@ -60,4 +59,38 @@ img {
 body {
   margin: 0 auto;
   color: #2c2727;
+}
+
+.signOutButton {
+  border-radius: 1em;
+  background-color: #d7deff;
+  padding: 0.5em;
+  border: white;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.signOutButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.signOutButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.signOutButton:hover span {
+  padding-right: 1em;
+}
+
+.signOutButton:hover span:after {
+  opacity: 1;
+  right: 0;
 }

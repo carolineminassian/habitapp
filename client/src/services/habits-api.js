@@ -1,13 +1,5 @@
 import api from './api';
 
-export const signUp = (body) => {
-  return api.post('/authentication/sign-up', body).then((response) => {
-    const data = response.data;
-    const user = data.user;
-    return user;
-  });
-};
-
 /*
 GET | listAllHabits(category) | takes ‘habit category’ as an argument and lists all habits of that category
 
@@ -26,18 +18,6 @@ POST | habitCompletion(habit._id) | takes habit ID and data object (with timesta
 POST | checkStreak(habit._id) |  takes habit ID as argument, looks for userId in habit.user.userID, checks last streak in the data log habit.user.data and updates habit.user.streak accordingly
 */
 
-export const listAllHabits = (category) => {
-  return api.get(`/category/${category}/list`).then((response) => {
-    return response.data.habits;
-  });
-};
-
-export const listHabitDetail = (habitId) => {
-  return api.get(`/category/:category/detail/${habitId}`).then((response) => {
-    return response.data.habit;
-  });
-};
-
 export const listMyHabits = (userId) => {
   return api.get(`/user/${userId}/habits`).then((response) => {
     return response.data.myHabits;
@@ -45,13 +25,10 @@ export const listMyHabits = (userId) => {
 };
 
 export const addHabit = (data) => {
-  console.log(data);
-  const { userId, habitId } = data;
-  return api
-    .post(`/user/${userId}/habits/${habitId}/add`, data)
-    .then((response) => {
-      return response.data;
-    });
+  const userId = data.userId;
+  return api.post(`/user/${userId}/habits/add`, data).then((response) => {
+    return response.data;
+  });
 };
 
 export const removeHabit = (habitId) => {};

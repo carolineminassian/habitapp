@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { listHabitDetail, addHabit } from '../services/habits-api';
 import DateTimePicker from 'react-datetime-picker';
+import allHabitData from './../habitdata';
 
 class Detail extends Component {
   constructor() {
@@ -19,13 +20,14 @@ class Detail extends Component {
 
   loadData = async () => {
     await this.setState({ category: this.props.match.params.category }); //turn this into async await
-    listHabitDetail(this.props.match.params.habitId)
-      .then((habitFromAPI) => {
-        this.setState({
-          habit: habitFromAPI
-        });
-      })
-      .catch((error) => console.log(error));
+    await this.setState({
+      habit: Object.assign(
+        ...allHabitData.filter(
+          (habit) => habit.id === Number(this.props.match.params.habitId)
+        )
+      )
+    });
+    console.log(this.state);
   };
 
   handleSubmission = (event) => {
@@ -36,12 +38,17 @@ class Detail extends Component {
       quantity: this.state.quantity
     };
 
+    const habit = this.state.habit;
+
     addHabit({
       userId: '618fb6cd7f5f300e76322246',
-      habitId: this.state.habit._id,
+      habit,
       settings
     })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+        window.location.href = '/overview';
+      })
       .catch((error) => console.log(error));
   };
 
@@ -57,8 +64,7 @@ class Detail extends Component {
   render() {
     return (
       <div>
-        <h1>Habit Detail view</h1>
-        <p>{this.state.habit.name}</p>
+        <h1>{this.state.habit.name}</h1>
         <form>
           <label htmlFor="input-quantity">How many?</label>
           <input
@@ -68,6 +74,7 @@ class Detail extends Component {
             name="quantity"
             value={this.state.quantity}
             onChange={this.handleInputChange}
+            required
           />
 
           <label htmlFor="input-unit">unit</label>
@@ -76,6 +83,7 @@ class Detail extends Component {
             name="unit"
             onChange={this.handleInputChange}
             value={this.state.unit}
+            required
           >
             <option value="repetitions">repetitions</option>
             <option value="pages">pages</option>
