@@ -21,12 +21,12 @@ ul:not(#ul-myHabits) {
       rgba(224, 195, 252, 0.6) 50%,
       rgba(255, 255, 255, 0.6) 100%
     );
+    transition: ease-in-out 0.1s;
 
     a {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: inherit;
       padding: 140px;
       text-align: center;
       color: #2c2727;

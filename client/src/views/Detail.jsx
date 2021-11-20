@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { listHabitDetail, addHabit } from '../services/habits-api';
+import { addHabit } from '../services/habits-api';
 import DateTimePicker from 'react-datetime-picker';
 import allHabitData from './../habitdata';
+import './../styles/Detail.scss';
 
 class Detail extends Component {
   constructor() {
@@ -10,7 +11,7 @@ class Detail extends Component {
       habit: {},
       startDate: new Date(),
       unit: '',
-      quantity: 0
+      quantity: ''
     };
   }
 
@@ -32,6 +33,10 @@ class Detail extends Component {
 
   handleSubmission = (event) => {
     event.preventDefault();
+    if (!this.state.unit || !this.state.quantity) {
+      alert('Please set a quantity and a unit for your habit.');
+    }
+
     const settings = {
       startDate: this.state.startDate,
       unit: this.state.unit,
@@ -65,7 +70,7 @@ class Detail extends Component {
     return (
       <div>
         <h1>{this.state.habit.name}</h1>
-        <form>
+        <form id="form-detail">
           <label htmlFor="input-quantity">How many?</label>
           <input
             id="input-quantity"
@@ -75,6 +80,7 @@ class Detail extends Component {
             value={this.state.quantity}
             onChange={this.handleInputChange}
             required
+            placeholder="Choose a quantity for your habit."
           />
 
           <label htmlFor="input-unit">unit</label>
@@ -119,14 +125,15 @@ class Detail extends Component {
             nativeInputAriaLabel="Date and time"
             onChange={this.handleDateChange}
             secondAriaLabel="Second"
-            value={this.state.date}
             yearAriaLabel="Year"
             id="input-date"
             name="startDate"
             value={this.state.startDate}
           />
 
-          <button onClick={this.handleSubmission}>Track this habit</button>
+          <button className="btn-darkblue" onClick={this.handleSubmission}>
+            Track this habit
+          </button>
         </form>
       </div>
     );

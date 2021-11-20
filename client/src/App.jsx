@@ -75,10 +75,6 @@ class App extends Component {
         <BrowserRouter>
           {this.state.user && (
             <nav>
-              <Link className="link" to="/">
-                <div>Home</div>
-                <AiFillHome />
-              </Link>
               <Link className="link" to="/Dashboard">
                 <div>Dashboard</div>
                 <MdDashboard />

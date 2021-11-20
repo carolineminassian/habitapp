@@ -63,10 +63,11 @@ h1 {
   border-radius: 2em;
   margin-top: 0.8em;
   font-size: 1em;
+  transition: 0.1s ease-in-out;
 }
 .btn-darkblue:hover {
   background-color: #5869b0;
-  transition: 0.05s ease-in-out;
+  transition: 0.1s ease-in-out;
 }
 
 .btn-link {
@@ -95,7 +96,7 @@ h1 {
   font-weight: bold;
 }
 
-form {
+form:not(#form-detail) {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,0 +1,22 @@
+#div-list {
+  overflow-y: auto;
+  width: 95%;
+
+  > .link {
+    font-size: 1.5em;
+    transition: ease-in-out 0.1s;
+    text-align: left;
+  }
+
+  > .link:hover {
+    font-weight: bold;
+    transition: ease-in-out 0.1s;
+  }
+
+  .p-notification {
+    text-align: right;
+    color: #2c2727;
+    margin-right: 2em;
+    margin-top: 6em;
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 import allHabitData from './../habitdata';
+import './../styles/List.scss';
 
 class List extends Component {
   constructor() {
@@ -29,22 +30,32 @@ class List extends Component {
 
   render() {
     return (
-      <div>
+      <div id="div-list">
+        <Link className="link" to={`/Dashboard`}>
+          &larr; go back
+        </Link>
         <h1>{this.state.category}</h1>
-        <ul>
-          {this.state.habits.map((habit) => {
-            return (
-              <li key={habit._id}>
-                <Link
-                  className="link"
-                  to={`/category/${this.state.category}/detail/${habit.id}`}
-                >
-                  {habit.name}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        {(this.state.habits.length && (
+          <ul>
+            {this.state.habits.map((habit) => {
+              return (
+                <li key={habit._id}>
+                  <Link
+                    className="link"
+                    to={`/category/${this.state.category}/detail/${habit.id}`}
+                  >
+                    {habit.name}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        )) || (
+          <p className="p-notification">
+            Sorry, no habits in this category so far. But we're working on it.
+            Stay tuned. :)
+          </p>
+        )}
       </div>
     );
   }
