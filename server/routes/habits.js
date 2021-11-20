@@ -24,6 +24,7 @@ router.get('/user/:userId/habits', (req, res, next) => {
 router.post('/user/:userId/habits/add', (req, res, next) => {
   const { userId } = req.params;
   const habit = req.body.habit;
+  console.log('habit!!', req.body.startDate);
   const habitData = {
     name: habit.name,
     category: [...habit.category],
@@ -33,7 +34,13 @@ router.post('/user/:userId/habits/add', (req, res, next) => {
 
   //add user with settings to habit.users
 
-  Habit.create({ userId, ...habitData, ...req.body.settings })
+  Habit.create({
+    userId,
+    ...habitData,
+    startDate: req.body.startDate,
+    unit: req.body.unit,
+    quantity: req.body.quantity
+  })
     .then((newHabit) => {
       console.log('NEW HABIT WAS CREATED.');
 

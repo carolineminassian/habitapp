@@ -32,18 +32,23 @@ class Detail extends Component {
 
   handleSubmission = (event) => {
     event.preventDefault();
-    const settings = {
-      startDate: this.state.startDate,
-      unit: this.state.unit,
-      quantity: this.state.quantity
-    };
+    this.setState({
+      startDate: event.target.startDate,
+      unit: event.target.unit,
+      quantity: event.target.quantity
+    });
 
     const habit = this.state.habit;
+    const startDate = this.state.startDate;
+    const unit = this.state.unit;
+    const quantity = this.state.quantity;
 
     addHabit({
       userId: '618fb6cd7f5f300e76322246',
       habit,
-      settings
+      startDate,
+      unit,
+      quantity
     })
       .then((response) => {
         console.log(response);

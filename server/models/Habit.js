@@ -92,7 +92,6 @@ const schema = new mongoose.Schema({
     type: Date,
     required: true
   },
-
   additionalTags: [
     {
       type: String
