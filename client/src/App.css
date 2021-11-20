@@ -26,6 +26,11 @@
   color: #61dafb;
 }
 
+.link {
+  text-decoration: none;
+  color: #2c2727;
+}
+
 nav {
   display: flex;
   justify-content: space-around;
@@ -35,10 +40,18 @@ nav {
   background-color: #d7deff;
   width: 95%;
 }
-.link {
+nav .link {
   text-decoration: none;
   color: #2c2727;
   width: 8em;
+  transition: ease-in-out 0.1s;
+  border-radius: 10px;
+}
+
+nav .link:hover {
+  transform: scale(1.1);
+  transition: ease-in-out 0.1s;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 div ul li {
@@ -50,7 +63,7 @@ img {
   display: inline-block;
 }
 
-.p {
+.p:not(.p-notification) {
   padding-left: 10em;
   padding-right: 10em;
   text-align: center;

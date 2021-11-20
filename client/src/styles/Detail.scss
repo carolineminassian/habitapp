@@ -1,0 +1,12 @@
+#form-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  input:not(.react-datetime-picker__inputGroup__input) {
+    border-radius: 0.5em;
+    padding: 1.5em;
+    border: 1px solid #586ab079;
+    width: 40%;
+  }
+}

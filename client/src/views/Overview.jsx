@@ -1,6 +1,5 @@
 import React from 'react';
 import { Component } from 'react';
-import Calendar from 'react-calendar';
 import { listMyHabits } from './../services/habits-api';
 
 class Overview extends Component {
@@ -33,13 +32,13 @@ class Overview extends Component {
     return (
       <div>
         <h1>My Habits Overview</h1>
-        {/* <Calendar /> */}
         <ul id="ul-myHabits">
           {this.state.habits &&
             this.state.habits.map((habit) => {
               return (
                 <li key={habit.name}>
-                  {habit.name}
+                  <strong>{habit.name}:</strong> {habit.quantity} {habit.unit}{' '}
+                  per day
                   <div>
                     <span>
                       Mon<button>X</button>
