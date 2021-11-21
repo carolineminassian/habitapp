@@ -101,15 +101,11 @@ router.post('/user/:userId/habits/:habitId/update', (req, res, next) => {});
 
 //POST | habitCompletion(habit._id) | takes habit ID and data object (with timestamp) as arguments, looks for userId in habit.user.userID and adds data to habit.user.data
 router.post('/user/:userId/habits/:habitId/done', (req, res, next) => {
-  const { userId, habitId } = req.params;
+  const { habitId } = req.params;
 
-  Habit.findById(habitId)
-    .populate('user.data')
-    .then((habit) => {
-      return habit.user.find({ userId });
-    })
-    .then((user) => {
-      user.data.push(Date.now());
+  Habit.findByIdAndUpdate(habitId, { $push: { data: Date.now() } })
+    .then(() => {
+      console.log('ADDING NEW TIMESTAMP SUCCESSFUL.');
     })
     .catch((error) => {
       next(error);

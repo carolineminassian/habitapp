@@ -1,6 +1,6 @@
 import React from 'react';
 import { Component } from 'react';
-import { listMyHabits } from './../services/habits-api';
+import { listMyHabits, habitCompletion } from './../services/habits-api';
 
 class Overview extends Component {
   constructor() {
@@ -11,8 +11,9 @@ class Overview extends Component {
   }
 
   componentDidMount() {
-    const userId = '61969452775568975444e259';
+    const userId = '619576017b5c5349711d9bd1';
     this.loadHabitData(userId);
+    console.log('HERE COMES THE STATE');
     console.log(this.state);
   }
 
@@ -27,8 +28,12 @@ class Overview extends Component {
       });
   };
 
-  handleCompletion = () => {
-    const dataTracking = this.state.habits.data;
+  handleCompletion = (event) => {
+    event.preventDefault();
+    habitCompletion('619576017b5c5349711d9bd1', '619a5261b74b9006054a3f43') //first: userID, second: habitId.
+      .then(() => console.log('NEW TIMESTAMP CREATED'))
+      .catch((error) => console.log(error));
+    //const dataTracking = this.state.habits.data;
   };
 
   render() {
