@@ -1,20 +1,26 @@
 import React from 'react';
 import { Component } from 'react';
 import { listMyHabits, habitCompletion } from './../services/habits-api';
+import { loadAuthenticatedUser } from './../services/authentication';
+import { MdTransferWithinAStation } from 'react-icons/md';
+import { CgBorderStyleDashed } from 'react-icons/cg';
+import './../styles/CompletionButton.scss';
 
 class Overview extends Component {
   constructor() {
     super();
     this.state = {
-      habits: []
+      habits: [],
+      user: null,
+      currentDay: null,
+      weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      habitCompleted: false
     };
   }
 
   componentDidMount() {
-    const userId = '619576017b5c5349711d9bd1';
-    this.loadHabitData(userId);
-    console.log('HERE COMES THE STATE');
-    console.log(this.state);
+    this.loadUser();
+    this.setState({ currentDay: new Date().getDay() }); //gets current weekday. 1 - mon, 2 - tue, 3 - wed, ...
   }
 
   loadHabitData = async (userId) => {
@@ -28,10 +34,26 @@ class Overview extends Component {
       });
   };
 
+  loadUser = () => {
+    loadAuthenticatedUser()
+      .then((authenticatedUser) => {
+        if (authenticatedUser) {
+          this.setState({ user: authenticatedUser });
+          this.loadHabitData(this.state.user._id);
+        }
+        console.log(authenticatedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   handleCompletion = (event) => {
     event.preventDefault();
-    habitCompletion('619576017b5c5349711d9bd1', '619a5261b74b9006054a3f43') //first: userID, second: habitId.
-      .then(() => console.log('NEW TIMESTAMP CREATED'))
+    habitCompletion(this.state.user._id, '619a5261b74b9006054a3f43')
+      .then(() => {
+        this.setState({ habitCompleted: true });
+      }) //first: userID, second: habitId.
       .catch((error) => console.log(error));
     //const dataTracking = this.state.habits.data;
   };
@@ -48,33 +70,120 @@ class Overview extends Component {
                   <strong>{habit.name}:</strong> {habit.quantity} {habit.unit}{' '}
                   per day
                   <div>
-                    <span>
-                      Mon<button onClick={this.handleCompletion}>X</button>
+                    {this.state.weekdays.map((day, index) => {
+                      return (
+                        <span>
+                          {day}
+                          <button
+                            className="btn-habit-complete"
+                            onClick={this.handleCompletion}
+                            value={index + 1}
+                            style={{
+                              disabled:
+                                this.state.currentDay !== index + 1 &&
+                                !this.state.habitCompleted,
+                              background:
+                                (this.state.currentDay !== index + 1 &&
+                                  'grey') ||
+                                (this.state.currentDay === index + 1 &&
+                                  this.state.habitCompleted &&
+                                  'blue') ||
+                                'white',
+                              color: 'transparent',
+                              pointerEvents:
+                                (this.state.currentDay !== index + 1 ||
+                                  this.state.habitCompleted) &&
+                                ('none' || '')
+                            }}
+                          >
+                            X
+                          </button>
+                        </span>
+                      );
+                    })}
+                    {/* <span>
+                      Mon
+                      <button
+                        className="btn-habit-complete"
+                        onClick={this.handleCompletion}
+                        value="1"
+                        {this.state.currentDay === this.value && 'disabled'}
+                      >
+                        X
+                      </button>
                     </span>
                     <span>
                       {' '}
-                      Tue<button onClick={this.handleCompletion}>X</button>
+                      Tue
+                      <button
+                        className="btn-habit-complete"
+                        onClick={this.handleCompletion}
+                        value="2"
+                        {this.state.currentDay === this.value && 'disabled'}
+                      >
+                        X
+                      </button>
                     </span>
                     <span>
                       {' '}
-                      Wed<button onClick={this.handleCompletion}>X</button>
+                      Wed
+                      <button
+                        className="btn-habit-complete"
+                        onClick={this.handleCompletion}
+                        value="3"
+                        {this.state.currentDay === this.value && 'disabled'}
+                      >
+                        X
+                      </button>
                     </span>
                     <span>
                       {' '}
-                      Thu<button onClick={this.handleCompletion}>X</button>
+                      Thu
+                      <button
+                        className="btn-habit-complete"
+                        onClick={this.handleCompletion}
+                        value="4"
+                        {this.state.currentDay === this.value && 'disabled'}
+                      >
+                        X
+                      </button>
                     </span>
                     <span>
                       {' '}
-                      Fri<button onClick={this.handleCompletion}>X</button>
+                      Fri
+                      <button
+                        className="btn-habit-complete"
+                        onClick={this.handleCompletion}
+                        value="5"
+                        {this.state.currentDay === this.value && 'disabled'}
+                      >
+                        X
+                      </button>
                     </span>
                     <span>
                       {' '}
-                      Sat<button onClick={this.handleCompletion}>X</button>
+                      Sat
+                      <button
+                        className="btn-habit-complete"
+                        onClick={this.handleCompletion}
+                        value="6"
+                        {this.state.currentDay === this.value && 'disabled'}
+                      >
+                        X
+                      </button>
                     </span>
                     <span>
                       {' '}
-                      Sun<button onClick={this.handleCompletion}>X</button>
-                    </span>
+                      Sun
+                      <button
+                        className="btn-habit-complete"
+                        onCompletion={this.handleCompletion}
+                        value="7"
+                        {this.state.currentDay === this.value && 'disabled'}
+                      >
+                        X
+                      </button>
+                    </span> */}
                   </div>
                 </li>
               );

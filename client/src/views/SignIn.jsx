@@ -22,7 +22,7 @@ class SignIn extends Component {
     const { email, password } = this.state;
     signIn({ email, password })
       .then((user) => {
-        //this.props.onAuthenticationChange(user);
+        this.props.onAuthenticationChange(user);
         console.log('SIGN IN SUCCESSFUL');
         window.location.href = '/dashboard';
       })

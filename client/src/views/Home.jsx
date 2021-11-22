@@ -7,9 +7,6 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      txt: 'You deserve feeling awesome.',
-      speed: 150,
-      i: 0,
       signIn: true
     };
   }
@@ -25,20 +22,7 @@ class Home extends Component {
       signIn: false
     });
   };
-  /*
-  typeWriter = () => {
-    if (this.state.i < this.state.txt.length) {
-      document.getElementById('h1-landing-page').innerHTML +=
-        this.state.txt.charAt(this.state.i);
-      this.setState({ i: this.state.i + 1 });
-      setTimeout(this.typeWriter, this.state.speed);
-    }
-  };
 
-  componentDidMount() {
-    this.typeWriter();
-  }
-*/
   render() {
     return (
       <>
@@ -78,13 +62,13 @@ class Home extends Component {
           {(this.state.signIn && (
             <div>
               <SignIn
-                onAuthenticationChange={this.handleAuthenticationChange}
+                onAuthenticationChange={this.props.onAuthenticationChange}
               />
             </div>
           )) || (
             <div>
               <SignUp
-                onAuthenticationChange={this.handleAuthenticationChange}
+                onAuthenticationChange={this.props.onAuthenticationChange}
               />
             </div>
           )}

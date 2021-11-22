@@ -9,7 +9,7 @@ class Detail extends Component {
   constructor() {
     super();
     this.state = {
-      // user,
+      user: null,
       habit: {},
       startDate: new Date(),
       unit: 'times',
@@ -18,6 +18,7 @@ class Detail extends Component {
   }
 
   componentDidMount() {
+    this.loadUser();
     this.loadData();
   }
 
@@ -33,19 +34,18 @@ class Detail extends Component {
     console.log(this.state);
   };
 
-  // loadUser = () => {
-  //   let user;
-  //   loadAuthenticatedUser()
-  //   .then((authenticatedUser) => {
-  //     if (authenticatedUser) {
-  //       user = authenticatedUser;
-  //     }
-  //     console.log(authenticatedUser);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-  // };
+  loadUser = () => {
+    loadAuthenticatedUser()
+      .then((authenticatedUser) => {
+        if (authenticatedUser) {
+          this.setState({ user: authenticatedUser });
+        }
+        console.log(authenticatedUser);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   handleSubmission = (event) => {
     event.preventDefault();
@@ -60,11 +60,9 @@ class Detail extends Component {
     const unit = this.state.unit;
     const quantity = this.state.quantity;
     // this.loadUser();
-    const userId = '619576017b5c5349711d9bd1';
 
     addHabit({
-      // userId: user._id,
-      userId,
+      userId: this.state.user._id,
       habit,
       startDate,
       unit,
@@ -72,8 +70,7 @@ class Detail extends Component {
     })
       .then((response) => {
         console.log(response);
-        window.location.href = `/user/${userId}/overview`;
-        // window.location.href = `/user/${user._id}/overview`;
+        window.location.href = `/user/${this.state.user._id}/overview`;
       })
       .catch((error) => console.log(error));
   };

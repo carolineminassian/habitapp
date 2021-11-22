@@ -2,22 +2,20 @@
 //import { useState } from 'react';
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import './App.css';
+
 //Components
 import { Component } from 'react';
 import Home from './views/Home';
-import SignUp from './views/SignUp';
-import SignIn from './views/SignIn';
 import Dashboard from './views/Dashboard';
 import List from './views/List';
 import Detail from './views/Detail';
 import Profile from './views/Profile';
 import Overview from './views/Overview';
+import ProtectedRoute from './views/ProtectedRoute';
+
 //Icons
-import { AiFillHome } from 'react-icons/ai';
-// import { FaSignInAlt } from 'react-icons/fa';
 import { CgProfile } from 'react-icons/cg';
 import { MdDashboard } from 'react-icons/md';
-// import { FaPencilAlt } from 'react-icons/fa';
 import { GrOverview } from 'react-icons/gr';
 import { loadAuthenticatedUser, signOut } from './services/authentication';
 
@@ -30,7 +28,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: null
+      user: null,
+      loaded: false
     };
   }
 
@@ -54,15 +53,15 @@ class App extends Component {
   };
 
   handleAuthenticationChange = (user) => {
-    this.setState({ user });
+    this.setState({ user, loaded: this.state.user !== null });
   };
 
   handleSignOut = () => {
     signOut()
       .then(() => {
-        this.setState({ user: null });
+        this.setState({ user: null, loaded: false });
         window.location.href = '/';
-        //this.props.history.push('/'); -> no loading bar :)
+        //this.props.history.push('/'); //-> no loading bar :)
       })
       .catch((error) => {
         console.log(error);
@@ -98,19 +97,52 @@ class App extends Component {
           )}
 
           <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/SignUp" component={SignUp} exact />
-            <Route path="/SignIn" component={SignIn} exact />
-            <Route path="/Dashboard" component={Dashboard} exact />
-            <Route path="/category/:category/list" component={List} exact />
-
-            <Route path="/user/:userId/overview" component={Overview} exact />
             <Route
+              path="/"
+              render={(props) => (
+                <Home
+                  {...props}
+                  onAuthenticationChange={this.handleAuthenticationChange}
+                />
+              )}
+              exact
+            />
+
+            <ProtectedRoute
+              path="/Dashboard"
+              authorized={!this.state.loaded || this.state.user}
+              redirect="/"
+              component={Dashboard}
+              exact
+            />
+            <ProtectedRoute
+              path="/category/:category/list"
+              authorized={!this.state.loaded || this.state.user}
+              redirect="/"
+              component={List}
+              exact
+            />
+            <ProtectedRoute
+              path="/user/:userId/overview"
+              authorized={!this.state.loaded || this.state.user}
+              redirect="/"
+              component={Overview}
+              exact
+            />
+            <ProtectedRoute
               path="/category/:category/detail/:habitId"
+              authorized={!this.state.loaded || this.state.user}
+              redirect="/"
               component={Detail}
               exact
             />
-            <Route path="/Profile" component={Profile} exact />
+            <ProtectedRoute
+              path="/Profile"
+              authorized={!this.state.loaded || this.state.user}
+              redirect="/"
+              component={Profile}
+              exact
+            />
           </Switch>
         </BrowserRouter>
       </div>
