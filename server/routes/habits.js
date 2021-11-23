@@ -68,25 +68,18 @@ router.post('/user/:userId/habits/add', (req, res, next) => {
 router.post('/user/:userId/habits/:habitId/remove', (req, res, next) => {
   const { userId, habitId } = req.params;
   //remove user from habit.users
-  Habit.findByIdAndUpdate(
-    habitId,
+  User.findByIdAndUpdate(
+    userId,
     {
       $pull: {
-        users: { userId }
+        habits: { habitId }
       }
     },
     { new: true }
   )
     //remove habit from list of habits that user tracks (user.habits)
     .then(() => {
-      return User.findByIdAndUpdate(
-        userId,
-        { $pull: { habits: habitId } },
-        { new: true }
-      );
-    })
-    .then((user) => {
-      res.json({ user });
+      return Habit.findByIdAndDelete(habitId);
     })
     .catch((error) => {
       next(error);
