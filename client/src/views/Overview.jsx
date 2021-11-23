@@ -1,9 +1,11 @@
 import React from 'react';
 import { Component } from 'react';
-import { listMyHabits, habitCompletion } from './../services/habits-api';
+import {
+  listMyHabits,
+  habitCompletion,
+  removeHabit
+} from './../services/habits-api';
 import { loadAuthenticatedUser } from './../services/authentication';
-import { MdTransferWithinAStation } from 'react-icons/md';
-import { CgBorderStyleDashed } from 'react-icons/cg';
 import './../styles/CompletionButton.scss';
 
 class Overview extends Component {
@@ -22,6 +24,8 @@ class Overview extends Component {
     this.loadUser();
     this.setState({ currentDay: new Date().getDay() }); //gets current weekday. 1 - mon, 2 - tue, 3 - wed, ...
   }
+
+  componentDidUpdate() {}
 
   loadHabitData = async (userId) => {
     await listMyHabits(userId)
@@ -50,10 +54,21 @@ class Overview extends Component {
 
   handleCompletion = (event) => {
     event.preventDefault();
-    habitCompletion(this.state.user._id, '619a5261b74b9006054a3f43')
+    habitCompletion(this.state.user._id, event.target.value)
       .then(() => {
         this.setState({ habitCompleted: true });
-      }) //first: userID, second: habitId.
+      })
+      .catch((error) => console.log(error));
+    //const dataTracking = this.state.habits.data;
+  };
+
+  handleDeletion = (event) => {
+    event.preventDefault();
+    console.log('I WAS FIRED');
+    removeHabit(this.state.user._id, event.target.value)
+      .then(() => {
+        this.loadHabitData(this.state.user._id);
+      })
       .catch((error) => console.log(error));
     //const dataTracking = this.state.habits.data;
   };
@@ -66,7 +81,7 @@ class Overview extends Component {
           {this.state.habits &&
             this.state.habits.map((habit) => {
               return (
-                <li key={habit.name}>
+                <li key={habit._id}>
                   <strong>{habit.name}:</strong> {habit.quantity} {habit.unit}{' '}
                   per day
                   <div>
@@ -77,7 +92,6 @@ class Overview extends Component {
                           <button
                             className="btn-habit-complete"
                             onClick={this.handleCompletion}
-                            value={index + 1}
                             style={{
                               disabled:
                                 this.state.currentDay !== index + 1 &&
@@ -95,96 +109,17 @@ class Overview extends Component {
                                   this.state.habitCompleted) &&
                                 ('none' || '')
                             }}
+                            value={habit._id}
                           >
                             X
                           </button>
                         </span>
                       );
                     })}
-                    {/* <span>
-                      Mon
-                      <button
-                        className="btn-habit-complete"
-                        onClick={this.handleCompletion}
-                        value="1"
-                        {this.state.currentDay === this.value && 'disabled'}
-                      >
-                        X
-                      </button>
-                    </span>
-                    <span>
-                      {' '}
-                      Tue
-                      <button
-                        className="btn-habit-complete"
-                        onClick={this.handleCompletion}
-                        value="2"
-                        {this.state.currentDay === this.value && 'disabled'}
-                      >
-                        X
-                      </button>
-                    </span>
-                    <span>
-                      {' '}
-                      Wed
-                      <button
-                        className="btn-habit-complete"
-                        onClick={this.handleCompletion}
-                        value="3"
-                        {this.state.currentDay === this.value && 'disabled'}
-                      >
-                        X
-                      </button>
-                    </span>
-                    <span>
-                      {' '}
-                      Thu
-                      <button
-                        className="btn-habit-complete"
-                        onClick={this.handleCompletion}
-                        value="4"
-                        {this.state.currentDay === this.value && 'disabled'}
-                      >
-                        X
-                      </button>
-                    </span>
-                    <span>
-                      {' '}
-                      Fri
-                      <button
-                        className="btn-habit-complete"
-                        onClick={this.handleCompletion}
-                        value="5"
-                        {this.state.currentDay === this.value && 'disabled'}
-                      >
-                        X
-                      </button>
-                    </span>
-                    <span>
-                      {' '}
-                      Sat
-                      <button
-                        className="btn-habit-complete"
-                        onClick={this.handleCompletion}
-                        value="6"
-                        {this.state.currentDay === this.value && 'disabled'}
-                      >
-                        X
-                      </button>
-                    </span>
-                    <span>
-                      {' '}
-                      Sun
-                      <button
-                        className="btn-habit-complete"
-                        onCompletion={this.handleCompletion}
-                        value="7"
-                        {this.state.currentDay === this.value && 'disabled'}
-                      >
-                        X
-                      </button>
-                    </span> */}
                   </div>
+                  <button onClick={this.handleDeletion} value={habit._id}>
+                    Delete habit
+                  </button>
                 </li>
               );
             })}

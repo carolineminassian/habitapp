@@ -86,7 +86,7 @@ class Detail extends Component {
 
   render() {
     return (
-      <div>
+      <div id="div-detail">
         <h1>{this.state.habit.name}</h1>
         <form id="form-detail">
           <label htmlFor="input-quantity">How many?</label>

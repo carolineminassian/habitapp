@@ -31,7 +31,9 @@ export const addHabit = (data) => {
   });
 };
 
-export const removeHabit = (habitId) => {};
+export const removeHabit = (userId, habitId) => {
+  return api.post(`/user/${userId}/habits/${habitId}/remove`);
+};
 
 export const sendReminder = (habitId) => {};
 

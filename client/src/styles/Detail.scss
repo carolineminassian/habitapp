@@ -10,3 +10,14 @@
     width: 40%;
   }
 }
+
+#div-detail > .link {
+  font-size: 1.5em;
+  transition: ease-in-out 0.1s;
+  text-align: left;
+
+  &:hover {
+    font-weight: bold;
+    transition: ease-in-out 0.1s;
+  }
+}

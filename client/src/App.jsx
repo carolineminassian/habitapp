@@ -1,6 +1,4 @@
-// import { useState } from 'react';
-//import { useState } from 'react';
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Switch } from 'react-router-dom';
 import './App.css';
 
 //Components
@@ -97,8 +95,10 @@ class App extends Component {
           )}
 
           <Switch>
-            <Route
+            <ProtectedRoute
               path="/"
+              authorized={!(this.state.loaded && this.state.user)}
+              redirect="/Dashboard"
               render={(props) => (
                 <Home
                   {...props}
