@@ -23,8 +23,8 @@ class App extends Component {
   /* constLoadedUser:null
 }  */
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       user: null,
       loaded: false

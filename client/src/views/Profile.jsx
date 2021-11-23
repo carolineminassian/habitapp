@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import './../styles/Profile.scss';
 import { loadAuthenticatedUser } from './../services/authentication';
-
-class Profile extends Component {
-  constructor() {
-    super();
+//user API
+//import { user } from '../services/user';
+import dummyUser from './../images/dummyUser.png';
+export class Profile extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       user: null
+      //name: '',
+      // email: ''
+      //password: ''
     };
   }
 
@@ -25,27 +30,77 @@ class Profile extends Component {
         console.log(error);
       });
   };
+  handleInputChange = (event) => {
+    const { value, name } = event.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+  /*   handleFormSubmission = (event) => {
+    event.preventDefault();
+    const { name, image, email } = this.state;
+    user({ name,image, email })
+      .then((user) => {
+        console.log(user);
+        this.props.onAuthenticationChange(user);
+        console.log('SUCCESSFUL');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Sorry, didn`t work :(');
+      })} */
 
   render() {
     return (
-      <div>
+      <div className="profile">
+        {/*
         <img
-          src="data:image/png;base64,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"
-          alt="pic"
-        />
+          src={this.state.user.image ? this.state.user.image : dummyUser}
+          alt={this.state.user.name} /> */}
+        {this.state.user && <img src={dummyUser} alt={this.state.user.name} />}
 
-        <h2>Name</h2>
-        {this.state.user && <h1> {this.state.user.name} </h1>}
-
+        {/* <h2> {this.props.user.name ? this.props.user.name : ''}´s Profile </h2> */}
         {/* <img src={this.props.user.image}/> */}
-        <p className="p">
-          Cupidatat anim esse commodo consectetur laboris ex incididunt Lorem
-          eiusmod dolore ipsum quis excepteur esse.Nulla qui elit aute nulla et.
-          Ipsum labore incididunt voluptate aliquip commodo aliquip nulla
-          consectetur Lorem minim sunt. Duis cillum reprehenderit officia
-          eiusmod elit tempor. Aliquip cupidatat est anim ipsum aliqua commodo
-          consectetur occaecat.
-        </p>
+
+        {this.state.user && <h2> {this.state.user.name}'s Profile</h2>}
+
+        {this.state.user && (
+          <p className="p">
+            Welcome to your Profile, {this.state.user.name}!
+            <br />
+            Down below you can change your profile settings and set your own
+            profile picture.
+            <br />
+            Have fun!
+          </p>
+        )}
+        <br />
+        <hr />
+
+        <h3>Change your Settings ⚙️</h3>
+        <form
+        //</div> onSubmit={this.state.handleFormSubmission}
+        >
+          <label>Name</label>
+          <input
+            className="input"
+            type="text"
+            value={this.state.value}
+            //? this.state.user.name : ''}
+          ></input>
+          <br />
+          <label>Email</label>
+          <input
+            className="input"
+            type="email"
+            // value={this.props.user.email ? this.props.user.email : ''}
+          ></input>
+          <br />
+          <label>Profile Picture</label>
+          <input type="" className="input"></input>
+        </form>
+        <button className="button">Change ⚙️</button>
       </div>
     );
   }
