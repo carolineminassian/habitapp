@@ -68,6 +68,7 @@ router.post('/user/:userId/habits/add', (req, res, next) => {
 router.post('/user/:userId/habits/:habitId/remove', (req, res, next) => {
   const { userId, habitId } = req.params;
   //remove user from habit.users
+  let user;
   User.findByIdAndUpdate(
     userId,
     {
@@ -78,8 +79,12 @@ router.post('/user/:userId/habits/:habitId/remove', (req, res, next) => {
     { new: true }
   )
     //remove habit from list of habits that user tracks (user.habits)
-    .then(() => {
+    .then((doc) => {
+      user = doc;
       return Habit.findByIdAndDelete(habitId);
+    })
+    .then(() => {
+      res.json(user.habits);
     })
     .catch((error) => {
       next(error);
@@ -99,6 +104,7 @@ router.post('/user/:userId/habits/:habitId/done', (req, res, next) => {
   Habit.findByIdAndUpdate(habitId, { $push: { data: Date.now() } })
     .then(() => {
       console.log('ADDING NEW TIMESTAMP SUCCESSFUL.');
+      res.json({ habitId });
     })
     .catch((error) => {
       next(error);

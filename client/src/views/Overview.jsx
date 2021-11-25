@@ -16,7 +16,7 @@ class Overview extends Component {
       user: null,
       currentDay: null,
       weekdays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-      habitCompleted: false
+      habitCompleted: { habitId: null, status: false }
     };
   }
 
@@ -53,12 +53,19 @@ class Overview extends Component {
   };
 
   handleCompletion = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     habitCompletion(this.state.user._id, event.target.value)
-      .then(() => {
-        this.setState({ habitCompleted: true });
+      .then((doc) => {
+        doc === event.target.value &&
+          this.setState({
+            habitCompleted: {
+              habitId: doc,
+              status: !this.state.habitCompleted.status
+            }
+          });
       })
       .catch((error) => console.log(error));
+
     //const dataTracking = this.state.habits.data;
   };
 
@@ -95,24 +102,21 @@ class Overview extends Component {
                             style={{
                               disabled:
                                 this.state.currentDay !== index + 1 &&
-                                !this.state.habitCompleted,
+                                !this.state.habitCompleted.status,
                               background:
                                 (this.state.currentDay !== index + 1 &&
                                   'grey') ||
                                 (this.state.currentDay === index + 1 &&
-                                  this.state.habitCompleted &&
+                                  this.state.habitCompleted.status &&
                                   'blue') ||
                                 'white',
-                              color: 'transparent',
                               pointerEvents:
                                 (this.state.currentDay !== index + 1 ||
-                                  this.state.habitCompleted) &&
+                                  this.state.habitCompleted.status) &&
                                 ('none' || '')
                             }}
                             value={habit._id}
-                          >
-                            X
-                          </button>
+                          ></button>
                         </span>
                       );
                     })}
