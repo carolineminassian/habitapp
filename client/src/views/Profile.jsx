@@ -4,17 +4,24 @@ import { loadAuthenticatedUser } from './../services/authentication';
 //user API
 //import { user } from '../services/user';
 import dummyUser from './../images/dummyUser.png';
+import PopUp from './PopUp';
 export class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null
+      user: null,
+      showPopup: false
       //name: '',
       // email: ''
       //password: ''
     };
   }
 
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
+  }
   componentDidMount() {
     this.loadUser();
   }
@@ -69,38 +76,16 @@ export class Profile extends Component {
           <p className="p">
             Welcome to your Profile, {this.state.user.name}!
             <br />
-            Down below you can change your profile settings and set your own
-            profile picture.
-            <br />
-            Have fun!
+            You can change your profile settings and set your own profile
+            picture.
           </p>
         )}
-        <br />
-        <hr />
-
-        <h3>Change your Settings ⚙️</h3>
-        <form
-        //</div> onSubmit={this.state.handleFormSubmission}
-        >
-          <label>Name</label>
-          <input
-            className="input"
-            type="text"
-            value={this.state.value}
-            //? this.state.user.name : ''}
-          ></input>
-          <br />
-          <label>Email</label>
-          <input
-            className="input"
-            type="email"
-            // value={this.props.user.email ? this.props.user.email : ''}
-          ></input>
-          <br />
-          <label>Profile Picture</label>
-          <input type="" className="input"></input>
-        </form>
-        <button className="button">Change ⚙️</button>
+        <button className="button" onClick={this.togglePopup.bind(this)}>
+          Change here
+        </button>
+        {this.state.showPopup ? (
+          <PopUp text="❌" closePopup={this.togglePopup.bind(this)} />
+        ) : null}
       </div>
     );
   }
