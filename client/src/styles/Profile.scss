@@ -1,8 +1,38 @@
 //https://imagecolorpicker.com
-
-div {
+//https://elements.envato.com/de/running-people-XET6V4W
+.profile {
+  font-family: 'Playfair Display', sans-serif;
   h2 {
     font-size: 3em;
-    margin: 1em;
+    margin: 0.5em;
+  }
+  .button {
+    border-radius: 1em;
+    background-color: #d7deff;
+    padding: 0.5em;
+    border: white;
+    transition: all 0.5s;
+    cursor: pointer;
+    padding: 0.75em;
+    margin: 2em;
+
+    text-decoration: none;
+    color: #2c2727;
+    width: 8em;
+    transition: ease-in-out 0.1s;
+    border-radius: 10px;
+  }
+  input:hover {
+    background-color: #e7ebff;
+  }
+  .button:hover {
+    transform: scale(1.1);
+    transition: ease-in-out 0.1s;
+    background: #a6b7ff;
+    border: solid inherit #d7deff;
+  }
+  img:hover {
+    transform: scale(1.05);
+    transition: ease-in-out 0.1s;
   }
 }

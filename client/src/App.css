@@ -60,6 +60,7 @@ div ul li {
 img {
   width: 10em;
   border-radius: 50%;
+  margin-top: 2em;
   display: inline-block;
 }
 
@@ -88,6 +89,7 @@ body {
   display: inline-block;
   position: relative;
   transition: 0.5s;
+  font-family: inherit;
 }
 
 .signOutButton span:after {
