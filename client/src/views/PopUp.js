@@ -1,7 +1,39 @@
 import React, { Component } from 'react';
 import './../styles/Profile.scss';
+import { updateUser } from './../services/authentication';
 
 class PopUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: this.props.user
+    };
+  }
+
+  handleInputChange = (event) => {
+    const { value, name } = event.target;
+    let userObject = { ...this.state.user };
+    userObject[name] = value;
+    this.setState({ user: userObject });
+  };
+
+  handleFormSubmission = (event) => {
+    event.preventDefault();
+    let updatedUser = this.state.user;
+    updateUser({ updatedUser })
+      .then((user) => {
+        console.log(user);
+        console.log('UPDATING USER SUCCESSFUL');
+        this.props.closePopup();
+        this.props.handleSettingsUpdate();
+        //window.location.href = '/dashboard';
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Sorry, signing in didn`t work :(');
+      });
+  };
+
   render() {
     return (
       <div className="popup">
@@ -15,21 +47,26 @@ class PopUp extends React.Component {
               <input
                 className="input"
                 type="text"
-                //value={this.state.value}
-                //? this.state.user.name : ''}
+                name="name"
+                value={this.state.user.name || ''}
+                onChange={this.handleInputChange}
               ></input>
               <br />
               <label>Email</label>
               <input
                 className="input"
                 type="email"
-                // value={this.props.user.email ? this.props.user.email : ''}
+                name="email"
+                value={this.props.user.email || ''}
+                onChange={this.handleInputChange}
               ></input>
               <br />
               <label>Profile Picture</label>
               <input type="" className="input"></input>
             </form>
-            <button className="button1">Change ⚙️</button>
+            <button className="button1" onClick={this.handleFormSubmission}>
+              Change ⚙️
+            </button>
           </div>
           <button className="close" onClick={this.props.closePopup}>
             ❌

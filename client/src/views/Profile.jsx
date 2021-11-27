@@ -25,6 +25,7 @@ export class Profile extends Component {
   componentDidMount() {
     this.loadUser();
   }
+  componentDidUpdate() {}
 
   loadUser = () => {
     loadAuthenticatedUser()
@@ -84,7 +85,12 @@ export class Profile extends Component {
           Change here
         </button>
         {this.state.showPopup ? (
-          <PopUp text="❌" closePopup={this.togglePopup.bind(this)} />
+          <PopUp
+            text="❌"
+            closePopup={this.togglePopup.bind(this)}
+            user={this.state.user}
+            handleSettingsUpdate={this.loadUser}
+          />
         ) : null}
       </div>
     );

@@ -20,3 +20,9 @@ export const signOut = () => {
 export const loadAuthenticatedUser = () => {
   return api.get('/authentication/me').then((response) => response.data.user);
 };
+
+export const updateUser = (body) => {
+  return api
+    .post('/authentication/update', body.updatedUser)
+    .then((response) => console.log(response));
+};
