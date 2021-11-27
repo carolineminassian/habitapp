@@ -26,6 +26,7 @@ export class SignUp extends Component {
         this.props.onAuthenticationChange(user);
         console.log('SIGN UP SUCCESSFUL');
         // window.location.href = '/dashboard';
+        this.props.history.push('/dashboard');
       })
       .catch((error) => {
         console.log(error);
