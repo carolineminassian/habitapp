@@ -16,11 +16,12 @@ const habitRouter = require('./routes/habits');
 
 const app = express();
 
+// We're telling the server to accept requests from the client application
 app.use(
   cors({
     origin: [
       process.env.CLIENT_APP_ORIGIN,
-      'http://localhost:3000',
+      // 'http://localhost:3000',
       'https://hoppscotch.io'
     ],
     credentials: true
@@ -37,7 +38,9 @@ app.use(
     saveUninitialized: false,
     cookie: {
       maxAge: 15 * 24 * 60 * 60 * 1000,
-      httpOnly: true
+      httpOnly: true,
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : false, // *
+      secure: process.env.NODE_ENV === 'production' // *
     },
     store: connectMongo.create({
       mongoUrl: process.env.MONGODB_URI,

@@ -5,6 +5,7 @@ import { loadAuthenticatedUser } from './../services/authentication';
 //import { user } from '../services/user';
 import dummyUser from './../images/dummyUser.png';
 import PopUp from './PopUp';
+
 export class Profile extends Component {
   constructor(props) {
     super(props);
@@ -62,11 +63,13 @@ export class Profile extends Component {
   render() {
     return (
       <div className="profile">
-        {/*
-        <img
-          src={this.state.user.image ? this.state.user.image : dummyUser}
-          alt={this.state.user.name} /> */}
-        {this.state.user && <img src={dummyUser} alt={this.state.user.name} />}
+        {this.state.user && (
+          <img
+            src={this.state.user.image ? this.state.user.image : dummyUser}
+            alt={this.state.user.name}
+          />
+        )}
+        {/*{this.state.user && <img src={dummyUser} alt={this.state.user.name} />}*/}
 
         {/* <h2> {this.props.user.name ? this.props.user.name : ''}´s Profile </h2> */}
         {/* <img src={this.props.user.image}/> */}

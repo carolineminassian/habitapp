@@ -62,7 +62,7 @@ class PopUp extends React.Component {
               ></input>
               <br />
               <label>Profile Picture</label>
-              <input type="" className="input"></input>
+              <input type="file" className="input"></input>
             </form>
             <button className="button1" onClick={this.handleFormSubmission}>
               Change ⚙️
