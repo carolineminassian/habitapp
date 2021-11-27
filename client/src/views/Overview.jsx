@@ -52,6 +52,14 @@ class Overview extends Component {
       });
   };
 
+  // checkHabitStatus = () => {
+  //   this.state.habits.forEach((habit) => {
+  //     (habit.data[habit.data.length - 1].getDay() === Date().getDay() &&
+  //       console.log('Habit was completed today')) ||
+  //       console.log('Habit was NOT completed today');
+  //   });
+  // };
+
   handleCompletion = (event) => {
     // event.preventDefault();
     habitCompletion(this.state.user._id, event.target.value)
@@ -84,13 +92,20 @@ class Overview extends Component {
     return (
       <div>
         <h1>My Habits Overview</h1>
-        <ul id="ul-myHabits">
+        <ul id="ul-myHabits" style={{ 'list-style': 'none' }}>
           {this.state.habits &&
             this.state.habits.map((habit) => {
               return (
                 <li key={habit._id}>
                   <strong>{habit.name}:</strong> {habit.quantity} {habit.unit}{' '}
                   per day
+                  <span>
+                    <strong>
+                      {' '}
+                      - current streak: {habit.data.length}{' '}
+                      {habit.data.length === 1 ? 'day' : 'days'}
+                    </strong>
+                  </span>
                   <div>
                     {this.state.weekdays.map((day, index) => {
                       return (
@@ -105,10 +120,10 @@ class Overview extends Component {
                                 !this.state.habitCompleted.status,
                               background:
                                 (this.state.currentDay !== index + 1 &&
-                                  'grey') ||
+                                  '#b9b9b9') ||
                                 (this.state.currentDay === index + 1 &&
                                   this.state.habitCompleted.status &&
-                                  'blue') ||
+                                  '#3e2d83') ||
                                 'white',
                               pointerEvents:
                                 (this.state.currentDay !== index + 1 ||
