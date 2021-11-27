@@ -62,4 +62,16 @@ router.get('/me', (req, res, next) => {
   res.json({ user });
 });
 
+router.post('/update', (req, res, next) => {
+  console.log('Here comes the request.');
+  const user = req.body;
+  User.findByIdAndUpdate(user._id, { ...user }, { new: true })
+    .then((updatedUser) => {
+      res.json({ updatedUser });
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
+
 module.exports = router;
