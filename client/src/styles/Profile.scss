@@ -39,12 +39,16 @@
     border-radius: 10px;
   }
   input:hover {
-    background-color: #d0cbff;
+    background-color: #dbd6ff;
   }
+  // input > button {
+  //   border: none;
+  //   list-style: none;
+  // }
   .button:hover {
     transform: scale(1.1);
     transition: ease-in-out 0.1s;
-    background: #b1bfff;
+    background: #dbd6ff;
     border: solid inherit #d7deff;
     box-shadow: 8px 8px 8px #e0dcdc;
   }
