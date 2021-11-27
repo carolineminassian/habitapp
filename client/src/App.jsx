@@ -101,6 +101,7 @@ class App extends Component {
               redirect="/Dashboard"
               render={(props) => (
                 <Home
+                  user={this.state.user}
                   {...props}
                   onAuthenticationChange={this.handleAuthenticationChange}
                 />
