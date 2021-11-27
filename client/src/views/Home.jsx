@@ -61,15 +61,11 @@ class Home extends Component {
 
           {(this.state.signIn && (
             <div>
-              <SignIn
-                onAuthenticationChange={this.props.onAuthenticationChange}
-              />
+              <SignIn {...this.props} />
             </div>
           )) || (
             <div>
-              <SignUp
-                onAuthenticationChange={this.props.onAuthenticationChange}
-              />
+              <SignUp {...this.props} />
             </div>
           )}
         </div>

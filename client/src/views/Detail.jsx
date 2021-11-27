@@ -70,7 +70,7 @@ class Detail extends Component {
     })
       .then((response) => {
         console.log(response);
-        window.location.href = `/user/${this.state.user._id}/overview`;
+        this.props.history.push(`/user/${this.state.user._id}/overview`);
       })
       .catch((error) => console.log(error));
   };
