@@ -54,7 +54,7 @@ class Detail extends Component {
       unit: event.target.unit,
       quantity: event.target.quantity
     });
-
+    const userId = this.state.user._id;
     const habit = this.state.habit;
     const startDate = this.state.startDate;
     const unit = this.state.unit;
@@ -62,7 +62,7 @@ class Detail extends Component {
     // this.loadUser();
 
     addHabit({
-      userId: this.state.user._id,
+      userId,
       habit,
       startDate,
       unit,
